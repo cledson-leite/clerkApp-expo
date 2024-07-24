@@ -7,7 +7,6 @@ import { useSignIn, useSignUp } from '@clerk/clerk-expo'
 const Register = () => {
   
     const {isLoaded, signUp, setActive } = useSignUp()
-    const {signIn } = useSignIn()
 
     const [emailAddress, setEmailAddress] = useState('')
     const [password, setPassword] = useState('')
