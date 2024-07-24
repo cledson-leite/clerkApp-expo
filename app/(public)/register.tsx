@@ -2,10 +2,12 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import { Stack } from 'expo-router'
 import Spinner from 'react-native-loading-spinner-overlay'
-import { useSignUp } from '@clerk/clerk-expo'
+import { useSignIn, useSignUp } from '@clerk/clerk-expo'
 
 const Register = () => {
+  
     const {isLoaded, signUp, setActive } = useSignUp()
+    const {signIn } = useSignIn()
 
     const [emailAddress, setEmailAddress] = useState('')
     const [password, setPassword] = useState('')
@@ -44,6 +46,7 @@ const Register = () => {
         try {
             const completeSingUp = await signUp.attemptEmailAddressVerification({code})
             await setActive({session: completeSingUp.createdSessionId})
+
         } catch (error: any) {
             alert(error.errors[0].message) 
             
