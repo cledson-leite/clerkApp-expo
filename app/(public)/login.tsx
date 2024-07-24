@@ -12,7 +12,25 @@ const login = () => {
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
 
-    const onSignInPress = async () => {}
+    const onSignInPress = async () => {
+       if(!isLoaded) return
+
+        setLoading(true)
+
+        try {
+          //logando
+            const completeSignIn = await signIn.create({
+                identifier: emailAddress,
+                password
+            })
+            //indica qual usuario esta logado
+            await setActive({session: completeSignIn.createdSessionId})
+        } catch (error: any) {
+            alert(error.errors[0].message)
+        } finally {
+            setLoading(false)
+        }
+    }
   return (
      <View style={styles.container}>
       <Spinner visible={loading} />
